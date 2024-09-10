@@ -1,0 +1,31 @@
+= DataDog Service
+:!toc-title:
+:!toc-placement:
+:toc:
+
+Set up a connection between a service and a team in DataDog.
+
+toc::[]
+
+== Usage
+Remember to check out the link:variables.tf[*variables*] and link:outputs.tf[*outputs*] to see all options.
+
+// TODO: Add variables to the module example!
+
+[source, hcl]
+----
+module "datadog-service" {
+  source = "github.com/nsbno/terraform-datadog-service?ref=x.y.z"
+
+  # Should correspond to the name of the service in Datadog. Lowercase.
+  service_name = "stasjon"
+  team         = module.account_metadata.team_name
+}
+
+module "account_metadata" {
+  source = "github.com/nsbno/terraform-account-metadata?ref=x.y.z"
+
+  team_name = true
+}
+----
+
