@@ -22,7 +22,7 @@ module "datadog-service" {
 }
 
 module "account_metadata" {
-  source = "github.com/nsbno/terraform-account-metadata?ref=x.y.z"
+  source = "github.com/nsbno/terraform-aws-account-metadata?ref=x.y.z"
 
   team_name = true
 }
