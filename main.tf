@@ -1,6 +1,6 @@
 locals {
   service_definition = {
-    apiVersion = "v3.0"
+    apiVersion = "v3"
     kind       = "service"
     metadata = {
       name        = var.service_name
