@@ -8,6 +8,14 @@ locals {
       owner       = var.team
       description = var.description
       tags = ["team:${var.team}"]
+      links = [
+          var.github_url != null ? {
+          name     = "Source Code"
+          type     = "repo"
+          provider = "github"
+          url      = var.github_url
+        } : null,
+      ]
     }
     #     contacts = [
     #       {
@@ -20,14 +28,6 @@ locals {
     #     application = var.application
     #     languages = var.languages
     #     type = var.type
-    links = [
-        var.github_url != null ? {
-        name     = "Source Code"
-        type     = "repo"
-        provider = "github"
-        url      = var.github_url
-      } : null,
-    ]
   }
 }
 
