@@ -4,7 +4,7 @@ locals {
     kind       = "service"
     metadata = {
       name        = var.service_name
-      displayname = var.display_name ? var.display_name : var.service_name
+      displayName = var.display_name != null ? var.display_name : var.service_name
       owner       = var.team
       description = var.description
       tags = ["team:${var.team}"]
