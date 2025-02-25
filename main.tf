@@ -1,9 +1,14 @@
 locals {
   service_definition = {
-    schema-version = "v2.2"
-    team           = var.team
-    dd-service     = var.service_name
-    description    = var.description
+    apiVersion = "v3.0"
+    kind       = "service"
+    metadata = {
+      name        = var.service_name
+      displayname = var.display_name ? var.display_name : var.service_name
+      owner       = var.team
+      description = var.description
+      tags = ["team:${var.team}"]
+    }
     #     contacts = [
     #       {
     #         name = "Support Email"
@@ -16,18 +21,16 @@ locals {
     #     languages = var.languages
     #     type = var.type
     links = [
-      var.github_url != null ? {
+        var.github_url != null ? {
         name     = "Source Code"
         type     = "repo"
         provider = "github"
         url      = var.github_url
       } : null,
     ]
-    tags = ["team:${var.team}"]
   }
 }
 
-// Service Definition with v2.2 Schema Definition
-resource "datadog_service_definition_yaml" "service_definition_v2_2" {
-  service_definition = yamlencode(local.service_definition)
+resource "datadog_software_catalog" "service_v3" {
+  entity = yamldecode(local.service_definition)
 }

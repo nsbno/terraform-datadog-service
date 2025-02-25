@@ -4,6 +4,13 @@ variable "service_name" {
   type = string
 }
 
+variable "display_name" {
+  description = "The display name of the service. A user friendly name for the service"
+
+  default = null
+  type    = string
+}
+
 variable "team" {
   description = "The team that owns the service"
 
