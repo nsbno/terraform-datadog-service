@@ -32,5 +32,5 @@ locals {
 }
 
 resource "datadog_software_catalog" "service_v3" {
-  entity = yamldecode(local.service_definition)
+  entity = yamlencode(local.service_definition)
 }
