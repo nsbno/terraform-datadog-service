@@ -1,3 +1,7 @@
+data "aws_ssm_parameter" "team_name" {
+  name = "/__platform__/team_name_handle"
+}
+
 locals {
   service_definition = {
     apiVersion = "v3"
@@ -5,9 +9,9 @@ locals {
     metadata = {
       name        = var.service_name
       displayName = var.display_name != null ? var.display_name : var.service_name
-      owner       = var.team_name
+      owner       = data.aws_ssm_parameter.team_name.value
       description = var.description
-      tags = ["team:${var.team_name}"]
+      tags = ["team:${data.aws_ssm_parameter.team_name.value}"]
       links = [
           var.github_url != null ? {
           name     = "Source Code"
@@ -16,18 +20,20 @@ locals {
           url      = var.github_url
         } : null,
       ]
+      contacts = [
+        var.support_email != null ? {
+          name    = "Support Email"
+          type    = "email"
+          contact = var.support_email
+        } : null,
+        var.slack_url != null ? {
+          name    = "Support Slack"
+          type    = "slack"
+          contact = var.slack_url
+        } : null,
+      ]
     }
-    #     contacts = [
-    #       {
-    #         name = "Support Email"
-    #         type = "email"
-    #         contact = var.support_email
-    #       },
-    #     ]
-    #     tier = var.tier
-    #     application = var.application
-    #     languages = var.languages
-    #     type = var.type
+
   }
 }
 

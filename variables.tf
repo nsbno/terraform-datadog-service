@@ -11,12 +11,6 @@ variable "display_name" {
   type    = string
 }
 
-variable "team_name" {
-  description = "The team that owns the service"
-
-  type = string
-}
-
 variable "description" {
   description = "The description of the service"
 
@@ -26,6 +20,20 @@ variable "description" {
 
 variable "github_url" {
   description = "The URL to the source code repository in GitHub"
+
+  default = null
+  type    = string
+}
+
+variable "support_email" {
+  description = "The email address for support to this service"
+
+  default = null
+  type    = string
+}
+
+variable "slack_url" {
+  description = "The slack URL for support to this service"
 
   default = null
   type    = string
