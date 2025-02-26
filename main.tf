@@ -5,9 +5,9 @@ locals {
     metadata = {
       name        = var.service_name
       displayName = var.display_name != null ? var.display_name : var.service_name
-      owner       = var.team
+      owner       = var.team_name
       description = var.description
-      tags = ["team:${var.team}"]
+      tags = ["team:${var.team_name}"]
       links = [
           var.github_url != null ? {
           name     = "Source Code"

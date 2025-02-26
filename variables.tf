@@ -11,7 +11,7 @@ variable "display_name" {
   type    = string
 }
 
-variable "team" {
+variable "team_name" {
   description = "The team that owns the service"
 
   type = string
