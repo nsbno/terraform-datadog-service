@@ -3,21 +3,6 @@ data "aws_ssm_parameter" "team_name" {
 }
 
 locals {
-  contacts = [
-    for contact in [
-      var.support_email != null ? {
-        name    = "Support Email"
-        type    = "email"
-        contact = var.support_email
-      } : null,
-      var.slack_url != null ? {
-        name    = "Support Slack"
-        type    = "slack"
-        contact = var.slack_url
-      } : null,
-    ] : contact if contact != null
-  ]
-
   service_definition = {
     apiVersion = "v3"
     kind       = "service"
@@ -35,7 +20,18 @@ locals {
           url      = var.github_url
         } : null,
       ]
-      contacts = length(local.contacts) > 0 ? local.contacts : null
+      contacts = [
+        var.support_email != null ? {
+          name    = "Support Email"
+          type    = "email"
+          contact = var.support_email
+        } : null,
+        var.slack_url != null ? {
+          name    = "Support Slack"
+          type    = "slack"
+          contact = var.slack_url
+        } : null,
+      ]
     }
 
   }
