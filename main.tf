@@ -1,19 +1,23 @@
 data "aws_ssm_parameter" "team_name" {
+  count = var.team_name_override == null ? 1 : 0
+
   name = "/__platform__/team_name_handle"
 }
 
 locals {
+  team_name = var.team_name_override != null ? var.team_name_override : data.aws_ssm_parameter.team_name[0].value
+
   service_definition = {
     apiVersion = "v3"
     kind       = "service"
     metadata = {
       name        = var.service_name
       displayName = var.display_name != null ? var.display_name : var.service_name
-      owner       = data.aws_ssm_parameter.team_name.value
+      owner       = local.team_name
       description = var.description
-      tags = ["team:${data.aws_ssm_parameter.team_name.value}"]
+      tags        = ["team:${local.team_name}"]
       links = [
-          var.github_url != null ? {
+        var.github_url != null ? {
           name     = "Source Code"
           type     = "repo"
           provider = "github"

@@ -38,3 +38,9 @@ variable "slack_url" {
   default = null
   type    = string
 }
+
+variable "team_name_override" {
+  description = "Override the team name tag for Datadog. If set, this will override the value from the SSM parameter."
+  type        = string
+  default     = null
+}
