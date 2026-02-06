@@ -10,7 +10,14 @@ toc::[]
 == Usage
 Remember to check out the link:variables.tf[*variables*] and link:outputs.tf[*outputs*] to see all options.
 
-NOTE: Requires link:https://github.com/nsbno/terraform-datadog-provider-setup[`nsbno/terraform-datadog-provider`] module to be set up.
+NOTE: 1) Make sure your AWS Accounts has the
+SSM Parameter +/__platform__/team_name_handle+, with a value referencing your team-handle. Typically the lowercase name.
+See link:https://github.com/nsbno/template-aws-account-setup/blob/master/modules/environment_account_setup/main.tf#L59[template-aws-account-setup]
+for how it works.
+
+
+NOTE: 2) Requires link:https://github.com/nsbno/terraform-datadog-provider-setup[`nsbno/terraform-datadog-provider`] module to be set up.
+
 [source, hcl]
 ----
 module "datadog-service" {
